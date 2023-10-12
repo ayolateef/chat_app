@@ -23,14 +23,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
-          actions: [
-            IconButton(onPressed: signOut, icon: const Icon(Icons.logout))
-          ],
-        ),
-        body:  _buildUserList(),
-        );
+      appBar: AppBar(
+        title: const Text('Home Page'),
+        actions: [
+          IconButton(onPressed: signOut, icon: const Icon(Icons.logout))
+        ],
+      ),
+      body: _buildUserList(),
+    );
   }
 
   Widget _buildUserList() {
@@ -65,12 +65,14 @@ class _HomePageState extends State<HomePage> {
                   builder: (context) => ChatPage(
                         userEmail: data['email'],
                         userId: data['uid'],
+                        participantIds: [
+                          data['uid'],
+                        ], // Add the participantIds argument
                       )));
         },
       );
     } else {
       return Container();
-      
     }
   }
 }

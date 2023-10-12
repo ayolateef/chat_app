@@ -5,12 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Services/auth/auth_services.dart';
 import 'firebase_options.dart';
+import 'models/chat_models.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(ChangeNotifierProvider(
-      create: (BuildContext context) => AuthService(), child: const ChatApp()));
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(create: (context) => ChatMessages()),
+      ],
+      child: const ChatApp(),
+    ),
+  );
 }
 
 class ChatApp extends StatelessWidget {

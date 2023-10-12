@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class Message {
   final String senderId;
@@ -33,5 +34,26 @@ class Message {
       'message': message,
       'timestamp': timestamp,
     };
+  }
+}
+
+class ChatMessages with ChangeNotifier {
+  final Map<String, List<Message>> _messages = {};
+
+  void addMessage(String chatRoomId, Message message) {
+    if (_messages.containsKey(chatRoomId)) {
+      _messages[chatRoomId]!.add(message);
+    } else {
+      _messages[chatRoomId] = [message];
+    }
+    notifyListeners();
+  }
+
+  List<Message> getMessages(String chatRoomId) {
+    if (_messages.containsKey(chatRoomId)) {
+      return _messages[chatRoomId]!;
+    } else {
+      return [];
+    }
   }
 }
