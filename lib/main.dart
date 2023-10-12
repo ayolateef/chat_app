@@ -1,4 +1,3 @@
-import 'package:chat_app_test/Pages/register.dart';
 import 'package:chat_app_test/Services/auth/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
